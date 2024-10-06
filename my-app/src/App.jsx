@@ -59,7 +59,7 @@ const App = () => {
           placeholder="Search for a character"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="bg-white p-2 px-4 rounded-md w-full sm:w-auto"
+          className="bg-white p-2 px-4 rounded-md w-full sm:w-auto text-black"
         />
       </div>
 
