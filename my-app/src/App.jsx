@@ -50,7 +50,7 @@ const App = () => {
       <h1 className="text-2xl font-bold text-white mb-2">Character List</h1>
 
       <div className="flex flex-col sm:flex-row items-center gap-4 justify-center mb-5">
-        <button onClick={() => navigate("/newcharacter")} className="btn btn-black text-white px-4 py-2">
+        <button onClick={() => navigate("/newcharacter")} className="bg-black text-white px-4 py-2">
           Add New Character
         </button>
 
@@ -76,7 +76,7 @@ const App = () => {
                 }}
               />
               <h2 className="text-xl font-semibold my-4">{character.name}</h2>
-              <button onClick={() => handleDelete(character.id)} className="btn btn-black text-white mt-2 px-4 py-2">
+              <button onClick={() => handleDelete(character.id)} className="bg-black text-white mt-2 px-4 py-2">
                 Delete
               </button>
             </div>
