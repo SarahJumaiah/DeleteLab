@@ -29,10 +29,18 @@ const App = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`https://67023987bd7c8c1ccd3e38f7.mockapi.io/Rickdelete/${id}`)
+          .delete(
+            `https://67023987bd7c8c1ccd3e38f7.mockapi.io/Rickdelete/${id}`
+          )
           .then(() => {
-            setCharacters(characters.filter((character) => character.id !== id));
-            Swal.fire("Deleted!", "Your character has been deleted.", "success");
+            setCharacters(
+              characters.filter((character) => character.id !== id)
+            );
+            Swal.fire(
+              "Deleted!",
+              "Your character has been deleted.",
+              "success"
+            );
           })
           .catch((error) => {
             console.error("Error deleting character:", error);
@@ -50,7 +58,10 @@ const App = () => {
       <h1 className="text-2xl font-bold text-white mb-2">Character List</h1>
 
       <div className="flex flex-col sm:flex-row items-center gap-4 justify-center mb-5">
-        <button onClick={() => navigate("/newcharacter")} className="bg-black text-white px-4 py-2">
+        <button
+          onClick={() => navigate("/newcharacter")}
+          className="bg-black text-white px-4 py-2"
+        >
           Add New Character
         </button>
 
@@ -66,7 +77,7 @@ const App = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredCharacters.length > 0 ? (
           filteredCharacters.map((character) => (
-            <div key={character.id} className="card  text-white p-4 ">
+            <div key={character.id} className="card text-white p-4">
               <img
                 src={character.image || "https://via.placeholder.com/150"}
                 alt={character.name}
@@ -76,9 +87,20 @@ const App = () => {
                 }}
               />
               <h2 className="text-xl font-semibold my-4">{character.name}</h2>
-              <button onClick={() => handleDelete(character.id)} className="bg-black text-white mt-2 px-4 py-2">
-                Delete
-              </button>
+              <div className="flex justify-between gap-2">
+                <button
+                  onClick={() => navigate(`/updatecharacter/${character.id}`)}
+                  className="bg-black text-white mt-2 px-4 py-2"
+                >
+                  Update
+                </button>
+                <button
+                  onClick={() => handleDelete(character.id)}
+                  className="bg-black text-white mt-2 px-4 py-2"
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           ))
         ) : (

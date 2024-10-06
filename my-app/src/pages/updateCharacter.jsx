@@ -1,18 +1,29 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
-const updateCharacter = () => {
+const UpdateCharacter = () => {
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
   const [gender, setGender] = useState("");
   const navigate = useNavigate();
+  const { id } = useParams(); 
+
+  useEffect(() => {
+    axios.get(`https://67023987bd7c8c1ccd3e38f7.mockapi.io/Rickdelete/${id}`).then((response) => {
+      const character = response.data;
+      setName(character.name);
+      setImage(character.image);
+      setGender(character.gender);
+    });
+  }, [id]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newCharacter = { name, image, gender };
-    console.log("data", newCharacter);
-    axios.post("https://67023987bd7c8c1ccd3e38f7.mockapi.io/Rickdelete", newCharacter).then(() => {
+    const updatedCharacter = { name, image, gender };
+    console.log("Updated data", updatedCharacter);
+
+    axios.put(`https://67023987bd7c8c1ccd3e38f7.mockapi.io/Rickdelete/${id}`, updatedCharacter).then(() => {
       navigate("/"); 
     });
   };
@@ -53,7 +64,7 @@ const updateCharacter = () => {
             />
           </div>
           <button type="submit" className=" w-full p-2 bg-black text-white rounded-md">
-            Submit
+            Update
           </button>
         </form>
       </div>
@@ -61,4 +72,4 @@ const updateCharacter = () => {
   );
 };
 
-export default updatedCharacter;
+export default UpdateCharacter;
